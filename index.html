@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#650b16" />
+<title>My Home ❤️</title>
+<style>
+:root{--wine:#650b16;--red:#a20e25;--rose:#f4a0ad;--cream:#fff1e9;--ink:#2b0b12;--gold:#f6d8a8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#21060b;color:var(--cream);font-family:Georgia,"Times New Roman",serif}
+button,input{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+.screen{min-height:100svh;position:relative;overflow:hidden}
+.gate{display:grid;place-items:center;background:radial-gradient(ellipse at 50% 35%,#a51a2b 0,#5d0916 42%,#21060b 100%);padding:24px}
+.gate:before,.gate:after{content:"♥";position:absolute;color:#ffffff0b;font-size:clamp(160px,30vw,360px);pointer-events:none}
+.gate:before{top:-50px;left:-30px;transform:rotate(-18deg)}.gate:after{right:-35px;bottom:-100px;transform:rotate(18deg)}
+.lock-card{width:min(100%,370px);text-align:center;padding:36px 26px;border:1px solid #ffffff28;border-radius:24px;background:#2a071d55;box-shadow:0 25px 80px #0006;backdrop-filter:blur(12px);position:relative;z-index:1}
+.heart-icon{font-size:40px;filter:drop-shadow(0 0 18px #ff8aab)}
+.eyebrow{font:11px/1.5 Arial,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:#f4b6c0}
+h1,h2,h3,p{margin-top:0}
+.lock-card h1{font-size:clamp(30px,8vw,44px);font-weight:normal;font-style:italic;margin:12px 0}
+.sub{font:13px/1.8 Arial,sans-serif;color:#f6d9df}
+.dots{display:flex;justify-content:center;gap:13px;margin:28px 0 20px}
+.dot{width:10px;height:10px;border-radius:50%;border:1px solid #f7bdc9;transition:.2s}.dot.filled{background:#ffb4c2;box-shadow:0 0 12px #ff9bb4}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:240px;margin:auto}
+.key{border:1px solid #ffffff22;background:#ffffff0b;color:#fff;border-radius:50%;aspect-ratio:1;max-width:58px;width:100%;justify-self:center;font:16px Arial,sans-serif;transition:.2s}
+.key:hover{background:#ffffff25;transform:scale(1.04)}.key.special{font-size:11px}
+.hint{margin-top:20px;color:#d7a7b0;font:11px Arial,sans-serif}
+.main{background:linear-gradient(180deg,#5b0815,#8d0b1d 40%,#350811);min-height:100vh}
+.nav{position:absolute;z-index:4;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:22px 6vw;font:11px Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#f9dce0}
+.nav a{color:inherit;text-decoration:none;opacity:.8}
+.hero{min-height:95svh;display:grid;place-items:center;text-align:center;padding:90px 20px 70px;position:relative;background:radial-gradient(ellipse at 50% 45%,#b91630 0,#760b1d 42%,#3b0811 100%)}
+.hero:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 30%,#fff1 0 1px,transparent 2px),radial-gradient(circle at 80% 70%,#fff2 0 1px,transparent 2px);background-size:50px 50px;pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:780px}
+.hero .small{font:11px Arial,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#f8c8d0}
+.script{font-family:"Brush Script MT","Segoe Script",cursive;font-style:italic;font-weight:normal}
+.hero h2{font-size:clamp(44px,10vw,100px);line-height:.95;margin:22px 0;color:#fff1e9;text-shadow:0 5px 35px #ff8ca344}
+.hero p{font-size:clamp(15px,2vw,19px);line-height:1.8;color:#f7dce0;max-width:550px;margin:0 auto 30px}
+.primary{border:1px solid #f9d7dc;background:#f9d7dc;color:#690c1a;padding:13px 22px;border-radius:30px;font:11px Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;box-shadow:0 8px 25px #18030855;transition:.2s}
+.primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px #18030877}
+.section{padding:95px 6vw;position:relative}
+.section-head{text-align:center;max-width:700px;margin:0 auto 42px}
+.section-head .eyebrow{margin-bottom:14px}
+.section-head h2{font-size:clamp(36px,7vw,64px);font-weight:normal;margin-bottom:12px}
+.section-head p{color:#f3cbd1;line-height:1.8;font-size:15px}
+.flowers{background:radial-gradient(ellipse at 50% 0%,#7c1839 0,#451024 52%,#260812 100%);color:#fff0f4;overflow:hidden}
+.flowers .section-head .eyebrow{color:#ffc1d3}
+.flowers .section-head p{color:#f4c4d2}
+.flower-wall{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px;max-width:1000px;margin:auto;overflow:visible;border-radius:18px;padding:12px;background:linear-gradient(135deg,#55132c,#35101f);border:1px solid #ffb7ce55;box-shadow:0 18px 50px #09020888, inset 0 0 30px #ff9eb51a;isolation:isolate}
+.flower{appearance:none;-webkit-appearance:none;position:relative;min-width:0;width:100%;padding:0;aspect-ratio:.85;display:grid;place-items:center;border:1px solid #ffffff70;border-radius:10px;background:linear-gradient(145deg,#ffb3d0,#d64278);color:#fff;font-family:inherit;font-size:clamp(22px,4vw,44px);line-height:1;text-shadow:0 3px 8px #3b061d66;transform:rotate(var(--r,0deg)) scale(1);transform-origin:center;cursor:pointer;user-select:none;transition:transform .45s cubic-bezier(.2,.8,.2,1),filter .45s ease,opacity .4s ease,box-shadow .45s ease,background .45s ease;box-shadow:0 4px 12px #12030a55;outline:none;-webkit-tap-highlight-color:transparent;overflow:visible}
+.flower:nth-child(3n){background:linear-gradient(145deg,#ff9fbf,#b91e58)}
+.flower:nth-child(4n){background:linear-gradient(145deg,#ffe0a6,#e66c9c)}
+.flower:nth-child(5n){background:linear-gradient(145deg,#b6d9a6,#438f6b)}
+.flower:hover,.flower:focus-visible,.flower.is-focused{z-index:5;transform:rotate(0deg) scale(1.42) translateY(-5px);filter:drop-shadow(0 10px 10px #9d294866) saturate(1.35);box-shadow:0 0 0 3px #fff8,0 0 26px #ff7ca1c9;background:linear-gradient(145deg,#fff0f6,#ff6fa7);animation:flowerBloom .55s cubic-bezier(.2,.8,.2,1) both}
+.flower::before{content:"";position:absolute;inset:-5px;border:2px solid #ffd9e6;border-radius:14px;opacity:0;pointer-events:none;transition:opacity .3s ease,transform .45s ease;transform:scale(.78)}
+.flower:hover::before,.flower:focus-visible::before,.flower.is-focused::before{opacity:1;transform:scale(1.12)}
+@keyframes flowerBloom{0%{transform:rotate(var(--r,0deg)) scale(.88)}55%{transform:rotate(0deg) scale(1.5) translateY(-7px)}100%{transform:rotate(0deg) scale(1.42) translateY(-5px)}}
+.flower-wall.has-focus .flower:not(:hover):not(:focus-visible):not(.is-focused){opacity:.38;filter:blur(1px) saturate(.7);transform:scale(.9)}
+.flower:active{transform:rotate(0deg) scale(1.32)}
+.flower .bloom-sparkle{position:absolute;inset:0;display:grid;place-items:center;font-size:.45em;opacity:0;pointer-events:none}
+.flower:hover .bloom-sparkle,.flower:focus-visible .bloom-sparkle,.flower.is-focused .bloom-sparkle{animation:sparkleBloom .75s ease-out}
+@keyframes sparkleBloom{0%{opacity:0;transform:scale(.2) rotate(-20deg)}35%{opacity:1;transform:scale(1.5) rotate(15deg)}100%{opacity:0;transform:scale(2) rotate(35deg)}}
+.flower-tip{text-align:center;margin:22px auto 0;color:#8b4050;font:11px/1.7 Arial,sans-serif;letter-spacing:.08em}
+.photos{background:#300810}
+.photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:1050px;margin:0 auto}
+.photo{min-height:180px;aspect-ratio:3/4;position:relative;background:linear-gradient(145deg,#d5a1a8,#681120);border:7px solid #f7e3d9;box-shadow:0 12px 25px #0005;transform:rotate(var(--tilt,0deg));overflow:hidden}
+.photo:nth-child(2n){transform:rotate(2deg)}.photo:nth-child(3n){transform:rotate(-3deg)}
+.photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.photo .placeholder{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:10px;background:radial-gradient(circle at 50% 30%,#f5c7c7,#9b4050 55%,#420b17);font-size:35px}
+.photo .caption{position:absolute;bottom:0;left:0;right:0;background:#24060bd9;padding:10px 7px;text-align:center;font:11px Arial,sans-serif;color:#fff}
+.upload-row{text-align:center;margin:28px auto 0;font:12px Arial,sans-serif;color:#f3cbd1}
+.upload-row input{max-width:100%;margin-top:12px;color:#f3cbd1;font-size:12px}
+.letter-section{background:linear-gradient(145deg,#a40e27,#6b0b1b 70%,#360811);padding-top:100px;padding-bottom:100px}
+.letter{max-width:760px;margin:auto;padding:clamp(26px,6vw,60px);border:1px solid #f7d4d633;border-radius:18px;background:#40081355;box-shadow:0 25px 60px #1b0206aa;text-align:center}
+.letter h2{font-size:clamp(38px,8vw,70px);font-weight:normal;margin-bottom:26px}
+.letter p{font-size:clamp(15px,2.3vw,18px);line-height:2;color:#ffe8e5}
+.letter .sign{font-size:clamp(28px,5vw,40px);margin-top:28px;color:#ffd4da}
+.music{background:#23070c;padding-bottom:110px}
+.song-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1000px;margin:auto}
+.song{display:flex;gap:14px;align-items:center;padding:16px;border:1px solid #ffffff20;background:#ffffff08;border-radius:14px}
+.album{width:76px;aspect-ratio:1;border-radius:9px;flex-shrink:0;display:grid;place-items:center;font-size:27px;background:linear-gradient(135deg,#e5b6a9,#a32238 60%,#360811)}
+.song h3{font-size:16px;font-weight:normal;margin:0 0 7px}.song p{font:11px/1.5 Arial,sans-serif;color:#e6b8c1;margin:0 0 10px}
+.song a{font:10px Arial,sans-serif;text-transform:uppercase;letter-spacing:.12em;color:#ffdce0;text-decoration:none;border-bottom:1px solid #ffdce0;padding-bottom:3px}
+.ending{min-height:70svh;display:grid;place-items:center;text-align:center;padding:80px 20px;background:radial-gradient(ellipse at center,#9e142a,#31070f 70%)}
+.ending h2{font-size:clamp(42px,9vw,90px);line-height:1;margin:20px 0}
+.ending p{color:#f4cbd1;line-height:1.8}
+.heart-rain{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.floating-heart{position:absolute;bottom:-40px;animation:rise var(--dur,8s) linear infinite;left:var(--left,50%);font-size:var(--size,20px);opacity:0;color:#ff8ba1;animation-delay:var(--delay,0s)}
+@keyframes rise{0%{transform:translateY(0) rotate(0);opacity:0}15%{opacity:.75}85%{opacity:.6}100%{transform:translateY(-110vh) rotate(35deg);opacity:0}}
+footer{text-align:center;padding:20px;background:#190409;color:#b9808b;font:10px Arial,sans-serif;letter-spacing:.12em}
+/* Unlock reveal animation */
+.gate.unlocking .lock-card{animation:lockAway .75s cubic-bezier(.22,.8,.25,1) forwards}
+.gate.unlocking:before{animation:haloLeft 1.1s ease-out forwards}
+.gate.unlocking:after{animation:haloRight 1.1s ease-out forwards}
+.gate.unlocking{animation:gateFade 1.05s ease forwards;pointer-events:none}
+#site.revealing{animation:siteReveal 1.35s cubic-bezier(.2,.75,.25,1) both;transform-origin:50% 20%}
+#site.revealing .hero-inner{animation:heroRise 1.15s .22s cubic-bezier(.2,.8,.2,1) both}
+#site.revealing .nav{animation:navDrop .8s .45s ease both}
+.unlock-burst{position:fixed;z-index:99;left:50%;top:50%;width:0;height:0;pointer-events:none}
+.burst-heart{position:absolute;left:0;top:0;font-size:var(--s,24px);color:var(--c,#ffb4c2);text-shadow:0 0 18px #ff6b91;animation:heartBurst 1.2s var(--delay,0s) cubic-bezier(.12,.75,.25,1) forwards}
+.unlock-glow{position:fixed;z-index:98;inset:0;pointer-events:none;background:radial-gradient(circle at center,#fff3f5 0,#ffb1c433 18%,transparent 60%);animation:glowFlash 1.1s ease-out forwards}
+@keyframes lockAway{0%{opacity:1;transform:scale(1) translateY(0);filter:blur(0)}45%{opacity:1;transform:scale(1.06) translateY(-12px)}100%{opacity:0;transform:scale(.82) translateY(-45px);filter:blur(8px)}}
+@keyframes gateFade{0%{opacity:1}100%{opacity:0;visibility:hidden}}
+@keyframes siteReveal{0%{opacity:0;filter:blur(12px);transform:scale(1.035)}55%{opacity:1;filter:blur(0);transform:scale(1)}100%{opacity:1;filter:blur(0);transform:scale(1)}}
+@keyframes heroRise{0%{opacity:0;transform:translateY(28px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes navDrop{0%{opacity:0;transform:translateY(-14px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes haloLeft{to{transform:translate(-35px,-25px) scale(1.35);opacity:0}}
+@keyframes haloRight{to{transform:translate(35px,25px) scale(1.35);opacity:0}}
+@keyframes heartBurst{0%{opacity:0;transform:translate(-50%,-50%) scale(.2) rotate(0)}12%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1.25) rotate(var(--rot,35deg))}}
+@keyframes glowFlash{0%{opacity:0}22%{opacity:1}100%{opacity:0}}
+@media(max-width:700px){.section{padding:70px 18px}.flower-wall{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;padding:8px}.flower{font-size:clamp(22px,7vw,38px);border-radius:8px}.flower:hover,.flower:focus-visible,.flower.is-focused{transform:rotate(0deg) scale(1.22) translateY(-3px)}.photo-grid{grid-template-columns:repeat(2,1fr);gap:12px}.photo{min-height:170px}.song-grid{grid-template-columns:1fr}.nav{padding:18px 20px}.hero{min-height:88svh}.lock-card{padding:30px 20px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}}
+</style>
+</head>
+<body>
+<section class="screen gate" id="gate">
+  <div class="lock-card">
+    <div class="heart-icon">♥</div>
+    <div class="eyebrow">A little something for you</div>
+    <h1>Just for you</h1>
+    <p class="sub">A tiny secret opens a whole lot of love.</p>
+    <div class="dots" id="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+    <div class="keypad" id="keypad">
+      <button class="key" data-key="1">1</button><button class="key" data-key="2">2</button><button class="key" data-key="3">3</button>
+      <button class="key" data-key="4">4</button><button class="key" data-key="5">5</button><button class="key" data-key="6">6</button>
+      <button class="key" data-key="7">7</button><button class="key" data-key="8">8</button><button class="key" data-key="9">9</button>
+      <button class="key special" data-key="clear">CLEAR</button><button class="key" data-key="0">0</button><button class="key special" data-key="enter">OPEN ♥</button>
+    </div>
+    <div class="hint" id="hint">Hint: try 143.</div>
+  </div>
+</section>
+<main id="site" class="main hidden">
+  <nav class="nav"><span>♥ Made with love</span><a href="#letter">A note for you ↓</a></nav>
+  <section class="hero screen">
+    <div class="heart-rain" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="small">To my favorite person</div>
+      <h2 class="script">I love you<br/>to the moon & back</h2>
+      <p>In a world full of ordinary things, you will always be my favorite extraordinary one.</p>
+      <button class="primary" onclick="document.querySelector('#flowers').scrollIntoView({behavior:'smooth'})">Open your surprise ♥</button>
+    </div>
+  </section>
+  <section class="section flowers" id="flowers">
+    <div class="section-head"><div class="eyebrow">For the one who makes life bloom</div><h2 class="script">A garden for you</h2><p>If I could give you every flower in the world, I'd still need one more to say how much you mean to me.</p></div>
+    <div class="flower-wall" id="flowerWall" aria-label="A wall of flowers"></div>
+  </section>
+  <section class="section photos" id="memories">
+    <div class="section-head"><div class="eyebrow">Little moments, endless memories</div><h2 class="script">Our little world</h2><p>Every memory with you is my favorite.</p></div>
+    <div class="photo-grid" id="photoGrid">
+      <div class="photo" style="--tilt:-3deg"><div class="placeholder">🌷<br/><small>our first memory</small></div><div class="caption">The beginning of us</div></div>
+      <div class="photo"><div class="placeholder">✨<br/><small>your smile</small></div><div class="caption">My favorite view</div></div>
+      <div class="photo"><div class="placeholder">🌙<br/><small>late night talks</small></div><div class="caption">Time flies with you</div></div>
+      <div class="photo"><div class="placeholder">💌<br/><small>just because</small></div><div class="caption">Always, you</div></div>
+    </div>
+  </section>
+  <section class="section letter-section" id="letter">
+    <div class="letter">
+      <div class="eyebrow">A note from my heart</div>
+      <h2 class="script">My Dearest</h2>
+      <p>Somehow, in the middle of all the noise in this world, you became my peace.</p>
+      <p>You make the ordinary feel magical, the hard days feel lighter, and the happy days feel even brighter. I hope you never forget how loved you are, how beautiful your heart is, and how grateful I am that our paths crossed.</p>
+      <p>If I had to choose a thousand times, in a thousand different lives, I would still find my way back to you.</p>
+      <p>Thank you for being you. Today, tomorrow, and every day after that — I'm on your side.</p>
+      <div class="sign script">Forever and always, yours <br> Atulya Gargi Saraswat♥</div>
+    </div>
+  </section>
+  <section class="section music" id="songs">
+    <div class="section-head"><div class="eyebrow">The soundtrack to us</div><h2 class="script">Our Top Songs</h2><p>For the songs that remind me of you.</p></div>
+    <div class="song-grid">
+      <article class="song"><div class="album">♫</div><div><h3>Tujhko</h3><p>Arijit Singh</p><a href="https://open.spotify.com/track/34bZqssAITx04EAzcffySn?si=536e14dff8a64958" target="_blank" rel="noreferrer">Listen on Spotify ↗</a></div></article>
+      <article class="song"><div class="album">♡</div><div><h3>Perfect</h3><p>Ed Sheeran</p><a href="https://open.spotify.com/search/Perfect%20Ed%20Sheeran" target="_blank" rel="noreferrer">Listen on Spotify ↗</a></div></article>
+      <article class="song"><div class="album">☾</div><div><h3>Tu Chale</h3><p>Arijit Singh</p><a href="https://open.spotify.com/track/0XCtA9pYB0aOciPzrJpkAK?si=e1264e20eaba41b0" target="_blank" rel="noreferrer">Listen on Spotify ↗</a></div></article>
+      <article class="song"><div class="album">♡</div><div><h3>Mere Sohneya</h3><p>Sachet Tandon</p><a href="https://open.spotify.com/track/7sJQv0LRPgM2xCkkdWOlyj?si=257a698035b94cfb" target="_blank" rel="noreferrer">Listen on Spotify ↗</a></div></article>
+    </div>
+  </section>
+  <section class="ending screen">
+    <div class="heart-rain" aria-hidden="true"></div>
+    <div><div class="eyebrow">No matter where life takes us</div><h2 class="script">I choose you.<br/>Every single time.</h2><p>You are my today, all of my tomorrows,<br/>and my favorite forever. ♥</p><button class="primary" onclick="showNote()">One last thing…</button><p id="lastNote" class="hidden" style="margin-top:24px;font-style:italic">If you ever forget how special you are, come back here. I'll keep reminding you. ❤️</p></div>
+  </section>
+  <footer>MADE WITH LOVE, JUST FOR YOU ♥</footer>
+</main>
+<audio id="unlockSong" preload="auto" loop>
+  <source src="assets/music/tum-ho.mp3" type="audio/mpeg">
+</audio>
+<script>
+const CORRECT_PIN = "143"; // Change this to your own 3-digit code.
+let entered = "";
+const dots = [...document.querySelectorAll(".dot")];
+const hint = document.getElementById("hint");
+function paintDots(){dots.forEach((d,i)=>d.classList.toggle("filled",i<entered.length))}
+document.getElementById("keypad").addEventListener("click",e=>{
+ const b=e.target.closest("button"); if(!b)return; const k=b.dataset.key;
+ if(k==="clear"){entered="";hint.textContent="Hint: try 143 — or make this your own in the code."}
+ else if(k==="enter"){
+   if(entered===CORRECT_PIN){
+    const song = document.getElementById("unlockSong");
+    if (song) {
+      song.currentTime = 0;
+      song.play().catch(error => {
+        console.error("Could not start Tum Ho:", error);
+      });
+    }
+     const gate=document.getElementById("gate");
+     const site=document.getElementById("site");
+     gate.classList.add("unlocking");
+     createUnlockBurst();
+     window.setTimeout(()=>{
+       gate.classList.add("hidden");
+       site.classList.remove("hidden");
+       site.classList.add("revealing");
+       window.scrollTo(0,0);
+       document.querySelectorAll(".heart-rain").forEach(makeHearts);
+       window.setTimeout(()=>site.classList.remove("revealing"),1800);
+     },650);
+   }
+   else {entered="";hint.textContent="Not quite, sweetheart. Try again ♥"}
+ } else if(entered.length<3){entered+=k}
+ paintDots();
+});
+function createUnlockBurst(){
+ const glow=document.createElement("div");glow.className="unlock-glow";document.body.appendChild(glow);
+ window.setTimeout(()=>glow.remove(),1200);
+ const burst=document.createElement("div");burst.className="unlock-burst";document.body.appendChild(burst);
+ const colors=["#ffdce3","#ff8fa8","#fff1e9","#f6d8a8","#ffb4c2"];
+ for(let i=0;i<34;i++){
+   const h=document.createElement("span");h.className="burst-heart";h.textContent=i%5===0?"✦":(i%3===0?"♡":"♥");
+   const angle=(Math.PI*2*i/34)+(Math.random()-.5)*.25;
+   const distance=100+Math.random()*220;
+   h.style.setProperty("--x",Math.cos(angle)*distance+"px");
+   h.style.setProperty("--y",Math.sin(angle)*distance+"px");
+   h.style.setProperty("--s",(12+Math.random()*23)+"px");
+   h.style.setProperty("--c",colors[Math.floor(Math.random()*colors.length)]);
+   h.style.setProperty("--delay",(Math.random()*.16)+"s");
+   h.style.setProperty("--rot",((Math.random()-.5)*100)+"deg");
+   burst.appendChild(h);
+ }
+ window.setTimeout(()=>burst.remove(),1700);
+}
+function makeHearts(container){for(let i=0;i<24;i++){const h=document.createElement("span");h.className="floating-heart";h.textContent=Math.random()>.25?"♥":"♡";h.style.setProperty("--left",Math.random()*100+"%");h.style.setProperty("--size",10+Math.random()*23+"px");h.style.setProperty("--dur",6+Math.random()*8+"s");h.style.setProperty("--delay",-Math.random()*12+"s");container.appendChild(h)}}
+const wall=document.getElementById("flowerWall");
+const blooms=["🌸","🌹","🌷","🌺","💐","🌼","🌻","🪷"];
+for(let i=0;i<64;i++){
+ const f=document.createElement("button");
+ f.type="button";
+ f.className="flower";
+ f.setAttribute("aria-label","Focus flower "+(i+1));
+ f.setAttribute("aria-pressed","false");
+ f.textContent=blooms[Math.floor(Math.random()*blooms.length)];
+ f.style.setProperty("--r",(Math.random()*18-9)+"deg");
+ const sparkle=document.createElement("span");sparkle.className="bloom-sparkle";sparkle.setAttribute("aria-hidden","true");sparkle.textContent="✦";
+ f.appendChild(sparkle);
+ wall.appendChild(f);
+}
+// Mouse hover highlights one flower. Tap/click pins the bloom for touch screens.
+function clearFlowerFocus(){
+ wall.querySelectorAll(".flower.is-focused").forEach(f=>{f.classList.remove("is-focused");f.setAttribute("aria-pressed","false")});
+ wall.classList.remove("has-focus");
+}
+wall.addEventListener("pointerover",e=>{
+ const flower=e.target.closest(".flower");
+ if(!flower || e.pointerType==="touch")return;
+ wall.classList.add("has-focus");
+});
+wall.addEventListener("pointerout",e=>{
+ if(e.pointerType==="touch")return;
+ if(!wall.contains(e.relatedTarget))wall.classList.remove("has-focus");
+});
+wall.addEventListener("click",e=>{
+ const flower=e.target.closest(".flower");
+ if(!flower)return;
+ const wasFocused=flower.classList.contains("is-focused");
+ clearFlowerFocus();
+ if(!wasFocused){flower.classList.add("is-focused");flower.setAttribute("aria-pressed","true");wall.classList.add("has-focus")}
+});
+wall.addEventListener("keydown",e=>{
+ if(e.key==="Escape")clearFlowerFocus();
+});
+document.addEventListener("click",e=>{
+ if(!wall.contains(e.target))clearFlowerFocus();
+});
+const memoryCaptions=["My favorite memory","A moment with you","Us, always","The best days","Just us two","My happy place","Forever favorite","You & me"];
+
+/* Photos are loaded from photos.json in the same folder as this index.html.
+   Edit photos.json to add, remove, or change your memories. */
+
+
+
+async function loadSavedPhotos(){
+ const grid=document.getElementById("photoGrid");
+ try{
+   const response=await fetch("photos.json",{cache:"no-store"});
+   if(!response.ok)throw new Error("photos.json not found");
+   const photos=await response.json();
+   if(!Array.isArray(photos)||photos.length===0)return;
+   grid.innerHTML="";
+   photos.slice(0,8).forEach((photo,i)=>{
+     const card=document.createElement("div");card.className="photo";card.style.setProperty("--tilt",(i%2===0?-2:2)+"deg");
+     const img=document.createElement("img");img.src="assets/photos/"+photo.file;img.alt=photo.alt||"Our memory "+(i+1);
+     img.onerror=()=>{card.innerHTML='<div class="placeholder">📷<br/><small>Place '+photo.file+' in assets/photos</small></div>'};
+     const cap=document.createElement("div");cap.className="caption";cap.textContent=photo.caption||memoryCaptions[i%memoryCaptions.length];
+     card.append(img,cap);grid.appendChild(card);
+   });
+ }catch(error){/* Keep the sample placeholders when photos.json isn't configured yet. */}
+}
+loadSavedPhotos();
+function showNote(){document.getElementById("lastNote").classList.toggle("hidden")}
+</script>
+</body>
+</html>
